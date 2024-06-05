@@ -1,0 +1,1328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NeighborhoodCouncilModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Council_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Announcement_Info">
+          <Key>
+            <PropertyRef Name="Member_id" />
+            <PropertyRef Name="Committee_Member_id" />
+            <PropertyRef Name="Announcement_id" />
+          </Key>
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="int" Nullable="false" />
+          <Property Name="Announcement_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Announcements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Committee_Members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Council">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Elections">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="No_of_Voters" Type="int" Nullable="false" />
+          <Property Name="No_of_Nominations" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="Meeting_Arrangements">
+          <Key>
+            <PropertyRef Name="Project_id" />
+            <PropertyRef Name="Committee_Member_id" />
+            <PropertyRef Name="Meeting_id" />
+          </Key>
+          <Property Name="Project_id" Type="int" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="int" Nullable="false" />
+          <Property Name="Meeting_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meeting_Location">
+          <Key>
+            <PropertyRef Name="Meeting_id" />
+            <PropertyRef Name="Longitude" />
+            <PropertyRef Name="Latitude" />
+          </Key>
+          <Property Name="Meeting_id" Type="int" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cnic" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Full_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DoB" Type="date" Nullable="false" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date_joined" Type="date" Nullable="false" />
+          <Property Name="Council_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Nomination">
+          <Key>
+            <PropertyRef Name="Member_id" />
+            <PropertyRef Name="Election_id" />
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Election_id" Type="int" Nullable="false" />
+          <Property Name="Admin_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="30" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Budget" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Project_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Action_Taken" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Action_Date" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Feedback" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Project_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Report_Problem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProblemType" Type="nvarchar" MaxLength="30" />
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Serve">
+          <Key>
+            <PropertyRef Name="Member_id" />
+            <PropertyRef Name="Committee_Member_id" />
+          </Key>
+          <Property Name="Member_id" Type="int" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Voters_Info">
+          <Key>
+            <PropertyRef Name="Voter_id" />
+            <PropertyRef Name="Candidate_id" />
+            <PropertyRef Name="Election_id" />
+          </Key>
+          <Property Name="Voter_id" Type="int" Nullable="false" />
+          <Property Name="Candidate_id" Type="int" Nullable="false" />
+          <Property Name="No_of_Votes" Type="int" Nullable="false" />
+          <Property Name="Election_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Admin__Council_i__4F7CD00D">
+          <End Role="Council" Type="Self.Council" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Council_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admin__Member_id__4E88ABD4">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcem__Annou__7B5B524B">
+          <End Role="Announcements" Type="Self.Announcements" Multiplicity="1" />
+          <End Role="Announcement_Info" Type="Self.Announcement_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcements">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Announcement_Info">
+              <PropertyRef Name="Announcement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcem__Commi__7A672E12">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="1" />
+          <End Role="Announcement_Info" Type="Self.Announcement_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Announcement_Info">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcem__Membe__797309D9">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Announcement_Info" Type="Self.Announcement_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Announcement_Info">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Committee__Membe__5441852A">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Committee_Members">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_A__Commi__6EF57B66">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="1" />
+          <End Role="Meeting_Arrangements" Type="Self.Meeting_Arrangements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Arrangements">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_A__Meeti__6FE99F9F">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="1" />
+          <End Role="Meeting_Arrangements" Type="Self.Meeting_Arrangements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Arrangements">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_A__Proje__6E01572D">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Meeting_Arrangements" Type="Self.Meeting_Arrangements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Arrangements">
+              <PropertyRef Name="Project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_L__Meeti__68487DD7">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="1" />
+          <End Role="Meeting_Location" Type="Self.Meeting_Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Location">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Member__Council___4BAC3F29">
+          <End Role="Council" Type="Self.Council" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="Council_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nominatio__Admin__5CD6CB2B">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Nomination" Type="Self.Nomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Nomination">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nominatio__Elect__5BE2A6F2">
+          <End Role="Elections" Type="Self.Elections" Multiplicity="1" />
+          <End Role="Nomination" Type="Self.Nomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elections">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Nomination">
+              <PropertyRef Name="Election_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nominatio__Membe__5AEE82B9">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Nomination" Type="Self.Nomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Nomination">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project__Committ__5812160E">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project__Member___571DF1D5">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project_l__Proje__6B24EA82">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Project_log" Type="Self.Project_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_log">
+              <PropertyRef Name="Project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report_Pr__Membe__76969D2E">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Report_Problem" Type="Self.Report_Problem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Report_Problem">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Serve__Committee__73BA3083">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="1" />
+          <End Role="Serve" Type="Self.Serve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Serve">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Serve__Member_id__72C60C4A">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Serve" Type="Self.Serve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Serve">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voters_In__Candi__00200768">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Voters_Info" Type="Self.Voters_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Voters_Info">
+              <PropertyRef Name="Candidate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voters_In__Elect__01142BA1">
+          <End Role="Elections" Type="Self.Elections" Multiplicity="1" />
+          <End Role="Voters_Info" Type="Self.Voters_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elections">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Voters_Info">
+              <PropertyRef Name="Election_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voters_In__Voter__7F2BE32F">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Voters_Info" Type="Self.Voters_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Voters_Info">
+              <PropertyRef Name="Voter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NeighborhoodCouncilModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Announcement_Info" EntityType="Self.Announcement_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Announcements" EntityType="Self.Announcements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Committee_Members" EntityType="Self.Committee_Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Council" EntityType="Self.Council" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Elections" EntityType="Self.Elections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting_Arrangements" EntityType="Self.Meeting_Arrangements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting_Location" EntityType="Self.Meeting_Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nomination" EntityType="Self.Nomination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_log" EntityType="Self.Project_log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report_Problem" EntityType="Self.Report_Problem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Serve" EntityType="Self.Serve" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voters_Info" EntityType="Self.Voters_Info" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Admin__Council_i__4F7CD00D" Association="Self.FK__Admin__Council_i__4F7CD00D">
+            <End Role="Council" EntitySet="Council" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admin__Member_id__4E88ABD4" Association="Self.FK__Admin__Member_id__4E88ABD4">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcem__Annou__7B5B524B" Association="Self.FK__Announcem__Annou__7B5B524B">
+            <End Role="Announcements" EntitySet="Announcements" />
+            <End Role="Announcement_Info" EntitySet="Announcement_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcem__Commi__7A672E12" Association="Self.FK__Announcem__Commi__7A672E12">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Announcement_Info" EntitySet="Announcement_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcem__Membe__797309D9" Association="Self.FK__Announcem__Membe__797309D9">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Announcement_Info" EntitySet="Announcement_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Committee__Membe__5441852A" Association="Self.FK__Committee__Membe__5441852A">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_A__Commi__6EF57B66" Association="Self.FK__Meeting_A__Commi__6EF57B66">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Meeting_Arrangements" EntitySet="Meeting_Arrangements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_A__Meeti__6FE99F9F" Association="Self.FK__Meeting_A__Meeti__6FE99F9F">
+            <End Role="Meeting" EntitySet="Meeting" />
+            <End Role="Meeting_Arrangements" EntitySet="Meeting_Arrangements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_A__Proje__6E01572D" Association="Self.FK__Meeting_A__Proje__6E01572D">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Meeting_Arrangements" EntitySet="Meeting_Arrangements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_L__Meeti__68487DD7" Association="Self.FK__Meeting_L__Meeti__68487DD7">
+            <End Role="Meeting" EntitySet="Meeting" />
+            <End Role="Meeting_Location" EntitySet="Meeting_Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Member__Council___4BAC3F29" Association="Self.FK__Member__Council___4BAC3F29">
+            <End Role="Council" EntitySet="Council" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nominatio__Admin__5CD6CB2B" Association="Self.FK__Nominatio__Admin__5CD6CB2B">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Nomination" EntitySet="Nomination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nominatio__Elect__5BE2A6F2" Association="Self.FK__Nominatio__Elect__5BE2A6F2">
+            <End Role="Elections" EntitySet="Elections" />
+            <End Role="Nomination" EntitySet="Nomination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nominatio__Membe__5AEE82B9" Association="Self.FK__Nominatio__Membe__5AEE82B9">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Nomination" EntitySet="Nomination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project__Committ__5812160E" Association="Self.FK__Project__Committ__5812160E">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project__Member___571DF1D5" Association="Self.FK__Project__Member___571DF1D5">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project_l__Proje__6B24EA82" Association="Self.FK__Project_l__Proje__6B24EA82">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Project_log" EntitySet="Project_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report_Pr__Membe__76969D2E" Association="Self.FK__Report_Pr__Membe__76969D2E">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report_Problem" EntitySet="Report_Problem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Serve__Committee__73BA3083" Association="Self.FK__Serve__Committee__73BA3083">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Serve" EntitySet="Serve" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Serve__Member_id__72C60C4A" Association="Self.FK__Serve__Member_id__72C60C4A">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Serve" EntitySet="Serve" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voters_In__Candi__00200768" Association="Self.FK__Voters_In__Candi__00200768">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Voters_Info" EntitySet="Voters_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voters_In__Elect__01142BA1" Association="Self.FK__Voters_In__Elect__01142BA1">
+            <End Role="Elections" EntitySet="Elections" />
+            <End Role="Voters_Info" EntitySet="Voters_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voters_In__Voter__7F2BE32F" Association="Self.FK__Voters_In__Voter__7F2BE32F">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Voters_Info" EntitySet="Voters_Info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NeighborhoodCouncilModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Council_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Council" Relationship="Self.FK__Admin__Council_i__4F7CD00D" FromRole="Admin" ToRole="Council" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Admin__Member_id__4E88ABD4" FromRole="Admin" ToRole="Member" />
+          <NavigationProperty Name="Nominations" Relationship="Self.FK__Nominatio__Admin__5CD6CB2B" FromRole="Admin" ToRole="Nomination" />
+        </EntityType>
+        <EntityType Name="Announcement_Info">
+          <Key>
+            <PropertyRef Name="Member_id" />
+            <PropertyRef Name="Committee_Member_id" />
+            <PropertyRef Name="Announcement_id" />
+          </Key>
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Announcement_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Announcement" Relationship="Self.FK__Announcem__Annou__7B5B524B" FromRole="Announcement_Info" ToRole="Announcements" />
+          <NavigationProperty Name="Committee_Members" Relationship="Self.FK__Announcem__Commi__7A672E12" FromRole="Announcement_Info" ToRole="Committee_Members" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Announcem__Membe__797309D9" FromRole="Announcement_Info" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Announcement_Info" Relationship="Self.FK__Announcem__Annou__7B5B524B" FromRole="Announcements" ToRole="Announcement_Info" />
+        </EntityType>
+        <EntityType Name="Committee_Members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Announcement_Info" Relationship="Self.FK__Announcem__Commi__7A672E12" FromRole="Committee_Members" ToRole="Announcement_Info" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Committee__Membe__5441852A" FromRole="Committee_Members" ToRole="Member" />
+          <NavigationProperty Name="Meeting_Arrangements" Relationship="Self.FK__Meeting_A__Commi__6EF57B66" FromRole="Committee_Members" ToRole="Meeting_Arrangements" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK__Project__Committ__5812160E" FromRole="Committee_Members" ToRole="Project" />
+          <NavigationProperty Name="Members" Relationship="Self.Serve" FromRole="Committee_Members" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Council">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__Council_i__4F7CD00D" FromRole="Council" ToRole="Admin" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Member__Council___4BAC3F29" FromRole="Council" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Election">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="No_of_Voters" Type="Int32" Nullable="false" />
+          <Property Name="No_of_Nominations" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Nominations" Relationship="Self.FK__Nominatio__Elect__5BE2A6F2" FromRole="Elections" ToRole="Nomination" />
+          <NavigationProperty Name="Voters_Info" Relationship="Self.FK__Voters_In__Elect__01142BA1" FromRole="Elections" ToRole="Voters_Info" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Meeting_Arrangements" Relationship="Self.FK__Meeting_A__Meeti__6FE99F9F" FromRole="Meeting" ToRole="Meeting_Arrangements" />
+          <NavigationProperty Name="Meeting_Location" Relationship="Self.FK__Meeting_L__Meeti__68487DD7" FromRole="Meeting" ToRole="Meeting_Location" />
+        </EntityType>
+        <EntityType Name="Meeting_Arrangements">
+          <Key>
+            <PropertyRef Name="Project_id" />
+            <PropertyRef Name="Committee_Member_id" />
+            <PropertyRef Name="Meeting_id" />
+          </Key>
+          <Property Name="Project_id" Type="Int32" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Committee_Members" Relationship="Self.FK__Meeting_A__Commi__6EF57B66" FromRole="Meeting_Arrangements" ToRole="Committee_Members" />
+          <NavigationProperty Name="Meeting" Relationship="Self.FK__Meeting_A__Meeti__6FE99F9F" FromRole="Meeting_Arrangements" ToRole="Meeting" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__Meeting_A__Proje__6E01572D" FromRole="Meeting_Arrangements" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Meeting_Location">
+          <Key>
+            <PropertyRef Name="Meeting_id" />
+            <PropertyRef Name="Longitude" />
+            <PropertyRef Name="Latitude" />
+          </Key>
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <NavigationProperty Name="Meeting" Relationship="Self.FK__Meeting_L__Meeti__68487DD7" FromRole="Meeting_Location" ToRole="Meeting" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cnic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Full_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DoB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_joined" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Council_id" Type="Int32" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__Member_id__4E88ABD4" FromRole="Member" ToRole="Admin" />
+          <NavigationProperty Name="Announcement_Info" Relationship="Self.FK__Announcem__Membe__797309D9" FromRole="Member" ToRole="Announcement_Info" />
+          <NavigationProperty Name="Committee_Members" Relationship="Self.FK__Committee__Membe__5441852A" FromRole="Member" ToRole="Committee_Members" />
+          <NavigationProperty Name="Council" Relationship="Self.FK__Member__Council___4BAC3F29" FromRole="Member" ToRole="Council" />
+          <NavigationProperty Name="Nominations" Relationship="Self.FK__Nominatio__Membe__5AEE82B9" FromRole="Member" ToRole="Nomination" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK__Project__Member___571DF1D5" FromRole="Member" ToRole="Project" />
+          <NavigationProperty Name="Report_Problem" Relationship="Self.FK__Report_Pr__Membe__76969D2E" FromRole="Member" ToRole="Report_Problem" />
+          <NavigationProperty Name="Voters_Info" Relationship="Self.FK__Voters_In__Candi__00200768" FromRole="Member" ToRole="Voters_Info" />
+          <NavigationProperty Name="Voters_Info1" Relationship="Self.FK__Voters_In__Voter__7F2BE32F" FromRole="Member" ToRole="Voters_Info" />
+          <NavigationProperty Name="Committee_Members1" Relationship="Self.Serve" FromRole="Member" ToRole="Committee_Members" />
+        </EntityType>
+        <EntityType Name="Nomination">
+          <Key>
+            <PropertyRef Name="Member_id" />
+            <PropertyRef Name="Election_id" />
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Election_id" Type="Int32" Nullable="false" />
+          <Property Name="Admin_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Nominatio__Admin__5CD6CB2B" FromRole="Nomination" ToRole="Admin" />
+          <NavigationProperty Name="Election" Relationship="Self.FK__Nominatio__Elect__5BE2A6F2" FromRole="Nomination" ToRole="Elections" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Nominatio__Membe__5AEE82B9" FromRole="Nomination" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Budget" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Committee_Member_id" Type="Int32" />
+          <NavigationProperty Name="Committee_Members" Relationship="Self.FK__Project__Committ__5812160E" FromRole="Project" ToRole="Committee_Members" />
+          <NavigationProperty Name="Meeting_Arrangements" Relationship="Self.FK__Meeting_A__Proje__6E01572D" FromRole="Project" ToRole="Meeting_Arrangements" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Project__Member___571DF1D5" FromRole="Project" ToRole="Member" />
+          <NavigationProperty Name="Project_log" Relationship="Self.FK__Project_l__Proje__6B24EA82" FromRole="Project" ToRole="Project_log" />
+        </EntityType>
+        <EntityType Name="Project_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Action_Taken" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Action_Date" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Feedback" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Project_id" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__Project_l__Proje__6B24EA82" FromRole="Project_log" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Report_Problem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProblemType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Report_Pr__Membe__76969D2E" FromRole="Report_Problem" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Voters_Info">
+          <Key>
+            <PropertyRef Name="Voter_id" />
+            <PropertyRef Name="Candidate_id" />
+            <PropertyRef Name="Election_id" />
+          </Key>
+          <Property Name="Voter_id" Type="Int32" Nullable="false" />
+          <Property Name="Candidate_id" Type="Int32" Nullable="false" />
+          <Property Name="No_of_Votes" Type="Int32" Nullable="false" />
+          <Property Name="Election_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Election" Relationship="Self.FK__Voters_In__Elect__01142BA1" FromRole="Voters_Info" ToRole="Elections" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Voters_In__Candi__00200768" FromRole="Voters_Info" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="Self.FK__Voters_In__Voter__7F2BE32F" FromRole="Voters_Info" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK__Admin__Council_i__4F7CD00D">
+          <End Role="Council" Type="Self.Council" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Council_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admin__Member_id__4E88ABD4">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nominatio__Admin__5CD6CB2B">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Nomination" Type="Self.Nomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Nomination">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcem__Annou__7B5B524B">
+          <End Role="Announcements" Type="Self.Announcement" Multiplicity="1" />
+          <End Role="Announcement_Info" Type="Self.Announcement_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcements">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Announcement_Info">
+              <PropertyRef Name="Announcement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcem__Commi__7A672E12">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="1" />
+          <End Role="Announcement_Info" Type="Self.Announcement_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Announcement_Info">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcem__Membe__797309D9">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Announcement_Info" Type="Self.Announcement_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Announcement_Info">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Committee__Membe__5441852A">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Committee_Members">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_A__Commi__6EF57B66">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="1" />
+          <End Role="Meeting_Arrangements" Type="Self.Meeting_Arrangements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Arrangements">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project__Committ__5812160E">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee_Members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="Committee_Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Member__Council___4BAC3F29">
+          <End Role="Council" Type="Self.Council" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="Council_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nominatio__Elect__5BE2A6F2">
+          <End Role="Elections" Type="Self.Election" Multiplicity="1" />
+          <End Role="Nomination" Type="Self.Nomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elections">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Nomination">
+              <PropertyRef Name="Election_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voters_In__Elect__01142BA1">
+          <End Role="Elections" Type="Self.Election" Multiplicity="1" />
+          <End Role="Voters_Info" Type="Self.Voters_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elections">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Voters_Info">
+              <PropertyRef Name="Election_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_A__Meeti__6FE99F9F">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="1" />
+          <End Role="Meeting_Arrangements" Type="Self.Meeting_Arrangements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Arrangements">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_L__Meeti__68487DD7">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="1" />
+          <End Role="Meeting_Location" Type="Self.Meeting_Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Location">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_A__Proje__6E01572D">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Meeting_Arrangements" Type="Self.Meeting_Arrangements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meeting_Arrangements">
+              <PropertyRef Name="Project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nominatio__Membe__5AEE82B9">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Nomination" Type="Self.Nomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Nomination">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project__Member___571DF1D5">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report_Pr__Membe__76969D2E">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Report_Problem" Type="Self.Report_Problem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Report_Problem">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voters_In__Candi__00200768">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Voters_Info" Type="Self.Voters_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Voters_Info">
+              <PropertyRef Name="Candidate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voters_In__Voter__7F2BE32F">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Voters_Info" Type="Self.Voters_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Voters_Info">
+              <PropertyRef Name="Voter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project_l__Proje__6B24EA82">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Project_log" Type="Self.Project_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_log">
+              <PropertyRef Name="Project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Serve">
+          <End Role="Committee_Members" Type="Self.Committee_Members" Multiplicity="*" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="NeighborhoodCouncilEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Announcement_Info" EntityType="Self.Announcement_Info" />
+          <EntitySet Name="Announcements" EntityType="Self.Announcement" />
+          <EntitySet Name="Committee_Members" EntityType="Self.Committee_Members" />
+          <EntitySet Name="Councils" EntityType="Self.Council" />
+          <EntitySet Name="Elections" EntityType="Self.Election" />
+          <EntitySet Name="Meetings" EntityType="Self.Meeting" />
+          <EntitySet Name="Meeting_Arrangements" EntityType="Self.Meeting_Arrangements" />
+          <EntitySet Name="Meeting_Location" EntityType="Self.Meeting_Location" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Nominations" EntityType="Self.Nomination" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Project_log" EntityType="Self.Project_log" />
+          <EntitySet Name="Report_Problem" EntityType="Self.Report_Problem" />
+          <EntitySet Name="Voters_Info" EntityType="Self.Voters_Info" />
+          <AssociationSet Name="FK__Admin__Council_i__4F7CD00D" Association="Self.FK__Admin__Council_i__4F7CD00D">
+            <End Role="Council" EntitySet="Councils" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admin__Member_id__4E88ABD4" Association="Self.FK__Admin__Member_id__4E88ABD4">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nominatio__Admin__5CD6CB2B" Association="Self.FK__Nominatio__Admin__5CD6CB2B">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Nomination" EntitySet="Nominations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcem__Annou__7B5B524B" Association="Self.FK__Announcem__Annou__7B5B524B">
+            <End Role="Announcements" EntitySet="Announcements" />
+            <End Role="Announcement_Info" EntitySet="Announcement_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcem__Commi__7A672E12" Association="Self.FK__Announcem__Commi__7A672E12">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Announcement_Info" EntitySet="Announcement_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcem__Membe__797309D9" Association="Self.FK__Announcem__Membe__797309D9">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Announcement_Info" EntitySet="Announcement_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Committee__Membe__5441852A" Association="Self.FK__Committee__Membe__5441852A">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_A__Commi__6EF57B66" Association="Self.FK__Meeting_A__Commi__6EF57B66">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Meeting_Arrangements" EntitySet="Meeting_Arrangements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project__Committ__5812160E" Association="Self.FK__Project__Committ__5812160E">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Member__Council___4BAC3F29" Association="Self.FK__Member__Council___4BAC3F29">
+            <End Role="Council" EntitySet="Councils" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nominatio__Elect__5BE2A6F2" Association="Self.FK__Nominatio__Elect__5BE2A6F2">
+            <End Role="Elections" EntitySet="Elections" />
+            <End Role="Nomination" EntitySet="Nominations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voters_In__Elect__01142BA1" Association="Self.FK__Voters_In__Elect__01142BA1">
+            <End Role="Elections" EntitySet="Elections" />
+            <End Role="Voters_Info" EntitySet="Voters_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_A__Meeti__6FE99F9F" Association="Self.FK__Meeting_A__Meeti__6FE99F9F">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="Meeting_Arrangements" EntitySet="Meeting_Arrangements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_L__Meeti__68487DD7" Association="Self.FK__Meeting_L__Meeti__68487DD7">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="Meeting_Location" EntitySet="Meeting_Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_A__Proje__6E01572D" Association="Self.FK__Meeting_A__Proje__6E01572D">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Meeting_Arrangements" EntitySet="Meeting_Arrangements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nominatio__Membe__5AEE82B9" Association="Self.FK__Nominatio__Membe__5AEE82B9">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Nomination" EntitySet="Nominations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project__Member___571DF1D5" Association="Self.FK__Project__Member___571DF1D5">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report_Pr__Membe__76969D2E" Association="Self.FK__Report_Pr__Membe__76969D2E">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Report_Problem" EntitySet="Report_Problem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voters_In__Candi__00200768" Association="Self.FK__Voters_In__Candi__00200768">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Voters_Info" EntitySet="Voters_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voters_In__Voter__7F2BE32F" Association="Self.FK__Voters_In__Voter__7F2BE32F">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Voters_Info" EntitySet="Voters_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project_l__Proje__6B24EA82" Association="Self.FK__Project_l__Proje__6B24EA82">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Project_log" EntitySet="Project_log" />
+          </AssociationSet>
+          <AssociationSet Name="Serve" Association="Self.Serve">
+            <End Role="Committee_Members" EntitySet="Committee_Members" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NeighborhoodCouncilModelStoreContainer" CdmEntityContainer="NeighborhoodCouncilEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+                <ScalarProperty Name="Council_id" ColumnName="Council_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Announcement_Info">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Announcement_Info">
+              <MappingFragment StoreEntitySet="Announcement_Info">
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+                <ScalarProperty Name="Committee_Member_id" ColumnName="Committee_Member_id" />
+                <ScalarProperty Name="Announcement_id" ColumnName="Announcement_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Announcements">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcements">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Committee_Members">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Committee_Members">
+              <MappingFragment StoreEntitySet="Committee_Members">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Councils">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Council">
+              <MappingFragment StoreEntitySet="Council">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Elections">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Election">
+              <MappingFragment StoreEntitySet="Elections">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="No_of_Voters" ColumnName="No_of_Voters" />
+                <ScalarProperty Name="No_of_Nominations" ColumnName="No_of_Nominations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Meeting">
+              <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meeting_Arrangements">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Meeting_Arrangements">
+              <MappingFragment StoreEntitySet="Meeting_Arrangements">
+                <ScalarProperty Name="Project_id" ColumnName="Project_id" />
+                <ScalarProperty Name="Committee_Member_id" ColumnName="Committee_Member_id" />
+                <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meeting_Location">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Meeting_Location">
+              <MappingFragment StoreEntitySet="Meeting_Location">
+                <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Cnic" ColumnName="Cnic" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+                <ScalarProperty Name="Date_joined" ColumnName="Date_joined" />
+                <ScalarProperty Name="Council_id" ColumnName="Council_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nominations">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Nomination">
+              <MappingFragment StoreEntitySet="Nomination">
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+                <ScalarProperty Name="Election_id" ColumnName="Election_id" />
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+                <ScalarProperty Name="Committee_Member_id" ColumnName="Committee_Member_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_log">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Project_log">
+              <MappingFragment StoreEntitySet="Project_log">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Action_Taken" ColumnName="Action_Taken" />
+                <ScalarProperty Name="Action_Date" ColumnName="Action_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="Project_id" ColumnName="Project_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report_Problem">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Report_Problem">
+              <MappingFragment StoreEntitySet="Report_Problem">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ProblemType" ColumnName="ProblemType" />
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voters_Info">
+            <EntityTypeMapping TypeName="NeighborhoodCouncilModel.Voters_Info">
+              <MappingFragment StoreEntitySet="Voters_Info">
+                <ScalarProperty Name="Voter_id" ColumnName="Voter_id" />
+                <ScalarProperty Name="Candidate_id" ColumnName="Candidate_id" />
+                <ScalarProperty Name="No_of_Votes" ColumnName="No_of_Votes" />
+                <ScalarProperty Name="Election_id" ColumnName="Election_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Serve" TypeName="NeighborhoodCouncilModel.Serve" StoreEntitySet="Serve">
+            <EndProperty Name="Committee_Members">
+              <ScalarProperty Name="id" ColumnName="Committee_Member_id" />
+            </EndProperty>
+            <EndProperty Name="Member">
+              <ScalarProperty Name="id" ColumnName="Member_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
